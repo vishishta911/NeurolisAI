@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h1 class="mb-4">
+                User Profile
+            </h1>
+
+            <h3>Name</h3>
+            <p>{{ user.name }}</p>
+
+            <h3>Email</h3>
+            <p>{{ user.email }}</p>
+
+            <h3>Total MRI Uploads</h3>
+            <p>{{ total_uploads }}</p>
+
+            <h3>Symptoms Logged</h3>
+            <p>{{ symptom_count }}</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

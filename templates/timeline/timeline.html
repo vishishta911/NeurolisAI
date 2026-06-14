@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+MRI Timeline
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>
+            MRI Analysis Timeline
+        </h2>
+
+        <a href="/upload"
+           class="btn btn-primary">
+
+            Upload New MRI
+
+        </a>
+
+    </div>
+
+    {% if records %}
+
+    <div class="row">
+
+        {% for record in records %}
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow-sm h-100">
+
+                <img src="/{{ record.image_path }}"
+                     class="card-img-top"
+                     style="height:250px;object-fit:cover;">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+
+                        {{ record.prediction }}
+
+                    </h5>
+
+                    <p class="text-muted">
+
+                        {{ record.upload_date.strftime('%d %b %Y') }}
+
+                    </p>
+
+                    <span class="badge bg-success">
+
+                        {{ record.confidence }}%
+
+                    </span>
+
+                    <hr>
+
+                    <a href="/result/{{ record.id }}"
+                       class="btn btn-outline-primary w-100">
+
+                        View Full Analysis
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-info">
+
+        No MRI records found.
+        Upload your first MRI scan to begin tracking.
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

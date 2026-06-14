@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Analysis Result
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">
+    MRI Analysis Result
+</h2>
+
+<div class="card shadow-sm">
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <!-- Original MRI -->
+            <div class="col-md-6">
+
+                <h5 class="mb-3">
+                    Uploaded MRI
+                </h5>
+
+                <img src="/{{ record.image_path }}"
+                     class="img-fluid rounded shadow-sm">
+
+            </div>
+
+            <!-- Heatmap -->
+            <div class="col-md-6">
+
+                <h5 class="mb-3">
+                    AI Attention Heatmap
+                </h5>
+
+                <img src="/{{ record.heatmap_path }}"
+                     class="img-fluid rounded shadow-sm">
+
+            </div>
+
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Prediction Section -->
+        <h5>
+            Prediction
+        </h5>
+
+        <div class="alert alert-primary">
+
+            {{ record.prediction }}
+
+        </div>
+
+        <!-- Confidence Section -->
+        <h5>
+            Confidence
+        </h5>
+
+        <div class="alert alert-success">
+
+            {{ record.confidence }}%
+
+        </div>
+
+        <!-- Low Confidence Warning -->
+        {% if record.confidence < 70 %}
+
+        <div class="alert alert-warning">
+
+            <strong>Low Confidence Prediction</strong>
+
+            <br>
+
+            The model is uncertain about this classification.
+            Professional medical evaluation is recommended.
+
+        </div>
+
+        {% endif %}
+
+        <!-- Explanation -->
+        <h5>
+            AI Explanation
+        </h5>
+
+        <div class="alert alert-light">
+
+            {{ record.explanation }}
+
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="alert alert-secondary">
+
+            <strong>Disclaimer:</strong>
+
+            This system is intended for educational and research purposes only.
+            It should not be used as a substitute for professional medical diagnosis.
+
+        </div>
+
+        <!-- Download Report Button -->
+        <a href="/download-report/{{ record.id }}"
+           class="btn btn-success">
+
+            Download Report
+
+        </a>
+
+        <a href="/timeline"
+           class="btn btn-outline-primary ms-2">
+
+            Back to Timeline
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

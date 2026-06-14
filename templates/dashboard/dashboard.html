@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">
+    Welcome, {{ user_name }}
+</h2>
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h5>Total MRI Uploads</h5>
+
+                <h2>{{ total_uploads }}</h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h5>Latest Prediction</h5>
+
+                <h4>{{ latest_prediction }}</h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h5>Average Confidence</h5>
+
+                <h2>{{ average_confidence }}%</h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
