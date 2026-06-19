@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Reports
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+<div class="card border-0 shadow-sm mb-4"
+     style="border-radius:20px;">
+
+    <div class="card-body p-4">
+
+        <span class="badge bg-primary mb-2">
+            REPORT CENTER
+        </span>
+
+        <h1 class="fw-bold">
+            MRI Analysis Reports
+        </h1>
+
+        <p class="text-muted">
+
+            Access and download all previously
+            generated MRI analysis reports.
+
+        </p>
+
+    </div>
+
+</div>
+
+{% if records %}
+
+<div class="card stat-card">
+
+    <div class="card-body">
+
+        <table class="table table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Report ID
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Prediction
+                    </th>
+
+                    <th>
+                        Confidence
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for record in records %}
+
+                <tr>
+
+                    <td>
+
+                        NLS-{{ record.id }}
+
+                    </td>
+
+                    <td>
+
+                        {{ record.upload_date.strftime('%d %b %Y') }}
+
+                    </td>
+
+                    <td>
+
+                        {{ record.prediction }}
+
+                    </td>
+
+                    <td>
+
+                        {{ record.confidence }}%
+
+                    </td>
+
+                    <td>
+
+                        <a href="/download-report/{{ record.id }}"
+                           class="btn btn-success btn-sm">
+
+                            Download
+
+                        </a>
+
+                        <a href="/result/{{ record.id }}"
+                           class="btn btn-outline-primary btn-sm">
+
+                            View
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="alert alert-info">
+
+    No reports available.
+
+    Upload an MRI scan to generate
+    your first report.
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

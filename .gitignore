@@ -1,16 +1,13 @@
 venv/
 __pycache__/
 *.pyc
-
-instance/
-*.db
-
-.env
-
-static/uploads/
-
-models/*.keras
-
+.idea/
 .vscode/
 
-*.png
+dataset/
+uploads/
+
+*.h5
+*.keras
+
+.env

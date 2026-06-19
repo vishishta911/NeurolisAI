@@ -1,68 +1,113 @@
 {% extends 'base.html' %}
 
 {% block title %}
-MRI Timeline
+Medical Timeline
 {% endblock %}
 
 {% block content %}
 
-<div class="container mt-4">
+<div class="container-fluid">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<!-- HEADER -->
 
-        <h2>
-            MRI Analysis Timeline
-        </h2>
+<div class="card border-0 shadow-sm mb-4"
+     style="border-radius:20px;">
 
-        <a href="/upload"
-           class="btn btn-primary">
+    <div class="card-body p-4">
 
-            Upload New MRI
+        <span class="badge bg-primary mb-2">
+            MEDICAL TIMELINE
+        </span>
 
-        </a>
+        <h1 class="fw-bold">
+            Neurological Health Journey
+        </h1>
+
+        <p class="text-muted fs-5">
+
+            Track MRI analyses, AI observations,
+            and neurological health records over time.
+
+        </p>
 
     </div>
 
-    {% if records %}
+</div>
 
-    <div class="row">
+<!-- ACTION BUTTON -->
 
-        {% for record in records %}
+<div class="mb-4">
 
-        <div class="col-md-4 mb-4">
+    <a href="/upload"
+       class="btn btn-primary">
 
-            <div class="card shadow-sm h-100">
+        Upload New MRI Scan
 
-                <img src="/{{ record.image_path }}"
-                     class="card-img-top"
-                     style="height:250px;object-fit:cover;">
+    </a>
 
-                <div class="card-body">
+</div>
 
-                    <h5 class="card-title">
+{% if records %}
 
-                        {{ record.prediction }}
+<div class="timeline">
 
-                    </h5>
+    {% for record in records %}
 
-                    <p class="text-muted">
+    <div class="card shadow-sm border-0 mb-4"
+         style="border-left:6px solid #2563eb;">
+
+        <div class="card-body">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-2">
+
+                    <img src="/{{ record.image_path }}"
+                         class="img-fluid rounded">
+
+                </div>
+
+                <div class="col-md-7">
+
+                    <h4 class="fw-bold">
+
+                        MRI Analysis Completed
+
+                    </h4>
+
+                    <p class="text-muted mb-2">
 
                         {{ record.upload_date.strftime('%d %b %Y') }}
 
                     </p>
 
-                    <span class="badge bg-success">
+                    <p>
+
+                        AI observation indicates
+                        patterns associated with
+
+                        <strong>
+                            {{ record.prediction }}
+                        </strong>
+
+                    </p>
+
+                </div>
+
+                <div class="col-md-3 text-end">
+
+                    <span class="badge bg-success fs-6">
 
                         {{ record.confidence }}%
 
                     </span>
 
-                    <hr>
+                    <br><br>
 
                     <a href="/result/{{ record.id }}"
-                       class="btn btn-outline-primary w-100">
+                       class="btn btn-outline-primary">
 
-                        View Full Analysis
+                        View Report
 
                     </a>
 
@@ -72,20 +117,25 @@ MRI Timeline
 
         </div>
 
-        {% endfor %}
-
     </div>
 
-    {% else %}
+    {% endfor %}
 
-    <div class="alert alert-info">
+</div>
 
-        No MRI records found.
-        Upload your first MRI scan to begin tracking.
+{% else %}
 
-    </div>
+<div class="alert alert-info">
 
-    {% endif %}
+    No MRI records found.
+
+    Upload your first MRI scan to begin
+    your neurological health timeline.
+
+</div>
+
+{% endif %}
+
 
 </div>
 

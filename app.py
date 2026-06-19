@@ -136,14 +136,16 @@ def dashboard():
 
     records = MRIRecord.query.filter_by(
         user_id=session["user_id"]
+    ).order_by(
+        MRIRecord.upload_date.desc()
     ).all()
 
     total_uploads = len(records)
 
     latest_prediction = (
-        records[-1].prediction
+        records[0].prediction
         if records
-        else "No Records"
+        else "No Analysis Yet"
     )
 
     average_confidence = (
@@ -279,17 +281,42 @@ def result(record_id):
         record.image_path
     )
 
-    probability_data = list(
-        zip(
-            CLASS_NAMES,
-            probs
-        )
+    probability_data = zip(
+        CLASS_NAMES,
+        probs
     )
+
+    if record.confidence >= 90:
+        risk_level = "High Attention"
+
+    elif record.confidence >= 75:
+        risk_level = "Moderate Attention"
+
+    else:
+        risk_level = "Needs Further Evaluation"
 
     return render_template(
         "mri/result.html",
         record=record,
-        probability_data=probability_data
+        probability_data=probability_data,
+        risk_level=risk_level
+    )
+
+@app.route("/reports")
+def reports():
+
+    if "user_id" not in session:
+        return redirect("/login")
+
+    records = MRIRecord.query.filter_by(
+        user_id=session["user_id"]
+    ).order_by(
+        MRIRecord.upload_date.desc()
+    ).all()
+
+    return render_template(
+        "reports/reports.html",
+        records=records
     )
 
 @app.route("/download-report/<int:record_id>")
@@ -333,11 +360,11 @@ def profile():
     )
 
     total_uploads = MRIRecord.query.filter_by(
-        user_id=user.id
+        user_id=session["user_id"]
     ).count()
 
     symptom_count = Symptom.query.filter_by(
-        user_id=user.id
+        user_id=session["user_id"]
     ).count()
 
     return render_template(
@@ -347,7 +374,53 @@ def profile():
         symptom_count=symptom_count
     )
 
+#resources
+@app.route("/resources")
+def resources():
 
+    hospitals = [
+
+        {
+            "name": "Apollo Hospitals",
+            "speciality": "Neurology & Neurosurgery",
+            "location": "Hyderabad",
+            "contact": "+91 XXXXX XXXXX"
+        },
+
+        {
+            "name": "Yashoda Hospitals",
+            "speciality": "Neurosciences",
+            "location": "Hyderabad",
+            "contact": "+91 XXXXX XXXXX"
+        },
+
+        {
+            "name": "KIMS Hospitals",
+            "speciality": "Neurology",
+            "location": "Hyderabad",
+            "contact": "+91 XXXXX XXXXX"
+        },
+
+        {
+            "name": "AIG Hospitals",
+            "speciality": "Neurosciences",
+            "location": "Hyderabad",
+            "contact": "+91 XXXXX XXXXX"
+        },
+
+        {
+            "name": "NIMS",
+            "speciality": "Government Neuro Center",
+            "location": "Hyderabad",
+            "contact": "+91 XXXXX XXXXX"
+        }
+
+    ]
+
+    return render_template(
+        "resources/resources.html",
+        hospitals=hospitals
+    )
 # Logout
 @app.route("/logout")
 def logout():

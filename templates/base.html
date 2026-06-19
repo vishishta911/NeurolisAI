@@ -1,31 +1,179 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}NeuroLis AI{% endblock %}</title>
 
+    <title>
+        {% block title %}NeuroLis AI{% endblock %}
+    </title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          rel="stylesheet">
+
+    <style>
+
+        body{
+            background:#f5f7fb;
+            font-family:Segoe UI,sans-serif;
+        }
+
+        .sidebar{
+            width:260px;
+            height:100vh;
+            position:fixed;
+            left:0;
+            top:0;
+            background:#0f172a;
+            color:white;
+        }
+
+        .sidebar-brand{
+            padding:25px;
+            border-bottom:1px solid #1e293b;
+        }
+
+        .sidebar-brand h4{
+            margin:0;
+            font-weight:700;
+        }
+
+        .sidebar-brand p{
+            margin:0;
+            color:#94a3b8;
+            font-size:13px;
+        }
+
+        .sidebar a{
+            color:#cbd5e1;
+            text-decoration:none;
+            display:block;
+            padding:14px 25px;
+            transition:0.3s;
+        }
+
+        .sidebar a:hover{
+            background:#1e293b;
+            color:white;
+        }
+
+        .main-content{
+            margin-left:260px;
+        }
+
+        .topbar{
+            background:white;
+            height:70px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 30px;
+            box-shadow:0 2px 10px rgba(0,0,0,.05);
+        }
+
+        .page-content{
+            padding:30px;
+        }
+
+        .stat-card{
+            border:none;
+            border-radius:16px;
+            box-shadow:0 4px 15px rgba(0,0,0,.05);
+        }
+
+    </style>
 
 </head>
 
-<body class="bg-light">
+<body>
 
-{% include 'navbar.html' %}
+    <!-- SIDEBAR -->
 
-<div class="container py-4">
+    <div class="sidebar">
 
-{% block content %}
-{% endblock %}
+        <div class="sidebar-brand">
 
-</div>
+            <h4>🧠 NeuroLis AI</h4>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+            <p>
+                Neurological Health Platform
+            </p>
+
+        </div>
+
+        <a href="/dashboard">
+            <i class="bi bi-speedometer2"></i>
+            Dashboard
+        </a>
+
+        <a href="/upload">
+            <i class="bi bi-cloud-upload"></i>
+            MRI Analysis
+        </a>
+
+        <a href="/timeline">
+            <i class="bi bi-clock-history"></i>
+            Medical Timeline
+        </a>
+
+        <a href="/reports">
+            <i class="bi bi-file-earmark-pdf"></i>
+            Reports
+        </a>
+        <a href="/resources">
+            <i class="bi bi-hospital"></i>
+            Healthcare Resources
+        </a>
+
+        <a href="/profile">
+            <i class="bi bi-person-circle"></i>
+            Profile
+        </a>
+
+        <a href="/logout">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main-content">
+
+        <div class="topbar">
+
+            <h5 class="mb-0">
+                NeuroLis AI Dashboard
+            </h5>
+
+            <div>
+
+                {% if session.user_name %}
+
+                Welcome,
+                <strong>
+                    {{ session.user_name }}
+                </strong>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <div class="page-content">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+    </div>
 
 </body>
 

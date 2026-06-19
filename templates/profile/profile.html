@@ -1,28 +1,214 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Profile
+{% endblock %}
+
 {% block content %}
 
-<div class="container mt-5">
+<div class="container-fluid">
 
-    <div class="card shadow">
+    <!-- PROFILE HEADER -->
+
+    <div class="card border-0 shadow-sm mb-4"
+         style="border-radius:20px;">
+
+        <div class="card-body p-4">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-2 text-center">
+
+                    <div style="
+                        width:100px;
+                        height:100px;
+                        border-radius:50%;
+                        background:#2563eb;
+                        color:white;
+                        font-size:40px;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        margin:auto;">
+
+                        <i class="bi bi-person-fill"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-10">
+
+                    <h2 class="fw-bold">
+                        {{ user.name }}
+                    </h2>
+
+                    <p class="text-muted mb-1">
+                        {{ user.email }}
+                    </p>
+
+                    <span class="badge bg-success">
+                        Google Verified User
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- STATISTICS -->
+
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+
+            <div class="card stat-card">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        MRI Scans Uploaded
+                    </h6>
+
+                    <h2 class="fw-bold">
+                        {{ total_uploads }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card stat-card">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Symptoms Logged
+                    </h6>
+
+                    <h2 class="fw-bold">
+                        {{ symptom_count }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card stat-card">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Reports Generated
+                    </h6>
+
+                    <h2 class="fw-bold">
+                        {{ total_uploads }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ACCOUNT STATUS -->
+
+    <div class="card stat-card mb-4">
 
         <div class="card-body">
 
-            <h1 class="mb-4">
-                User Profile
-            </h1>
+            <h4 class="mb-3">
+                Account Status
+            </h4>
 
-            <h3>Name</h3>
-            <p>{{ user.name }}</p>
+            <div class="row">
 
-            <h3>Email</h3>
-            <p>{{ user.email }}</p>
+                <div class="col-md-4">
 
-            <h3>Total MRI Uploads</h3>
-            <p>{{ total_uploads }}</p>
+                    <div class="alert alert-success">
 
-            <h3>Symptoms Logged</h3>
-            <p>{{ symptom_count }}</p>
+                        <strong>
+                            Authentication
+                        </strong>
+
+                        <br>
+
+                        Google Verified
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="alert alert-primary">
+
+                        <strong>
+                            MRI Analysis
+                        </strong>
+
+                        <br>
+
+                        Active
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="alert alert-info">
+
+                        <strong>
+                            Medical Timeline
+                        </strong>
+
+                        <br>
+
+                        Enabled
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RECENT ACTIVITY -->
+
+    <div class="card stat-card">
+
+        <div class="card-body">
+
+            <h4 class="mb-3">
+                Healthcare Summary
+            </h4>
+
+            <p>
+
+                NeuroLis AI helps organize MRI analyses,
+                track neurological observations,
+                maintain medical history,
+                and provide AI-assisted healthcare insights.
+
+            </p>
 
         </div>
 
