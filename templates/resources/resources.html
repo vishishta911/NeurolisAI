@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Healthcare Resources
+Patient Guidance Center
 {% endblock %}
 
 {% block content %}
 
 <div class="container-fluid">
 
+<!-- HEADER -->
 
 <div class="card border-0 shadow-sm mb-4"
      style="border-radius:20px;">
@@ -15,17 +16,18 @@ Healthcare Resources
     <div class="card-body p-4">
 
         <span class="badge bg-primary mb-2">
-            HEALTHCARE RESOURCES
+            PATIENT GUIDANCE CENTER
         </span>
 
         <h1 class="fw-bold">
-            Recommended Neurology Centers
+            Next Steps & Support
         </h1>
 
         <p class="text-muted">
 
-            Explore neurological healthcare facilities
-            and specialist centers for further consultation.
+            Understand your MRI analysis,
+            explore specialist options,
+            and learn what steps to take next.
 
         </p>
 
@@ -33,47 +35,109 @@ Healthcare Resources
 
 </div>
 
-<div class="row">
+<!-- UNDERSTANDING RESULT -->
 
-    {% for hospital in hospitals %}
+<div class="card stat-card mb-4">
 
-    <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card-body">
+
+        <h4>
+            Understanding Your MRI Analysis
+        </h4>
+
+        <p class="mt-3">
+
+            NeuroLis AI helps identify imaging
+            patterns that may be associated with
+            neurological conditions.
+
+        </p>
+
+        <div class="alert alert-info">
+
+            <strong>Important:</strong>
+
+            AI results do not confirm a diagnosis.
+
+            A qualified healthcare professional
+            should review MRI scans and symptoms
+            before making medical decisions.
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- NEXT STEPS -->
+
+<div class="card stat-card mb-4">
+
+    <div class="card-body">
+
+        <h4>
+            Recommended Next Steps
+        </h4>
+
+        <ul class="mt-3">
+
+            <li>
+                Download and save your MRI report
+            </li>
+
+            <li>
+                Keep previous medical records ready
+            </li>
+
+            <li>
+                Consult a specialist if symptoms persist
+            </li>
+
+            <li>
+                Monitor any changes in symptoms
+            </li>
+
+            <li>
+                Schedule follow-up evaluations if needed
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!-- WHICH DOCTOR -->
+
+<div class="row mb-4">
+
+    <div class="col-md-4">
 
         <div class="card stat-card h-100">
 
             <div class="card-body">
 
-                <h4 class="fw-bold">
-
-                    {{ hospital.name }}
-
-                </h4>
-
-                <p class="text-primary">
-
-                    {{ hospital.speciality }}
-
-                </p>
+                <h5>
+                    Neurologist
+                </h5>
 
                 <p class="text-muted">
 
-                    <i class="bi bi-geo-alt-fill"></i>
-
-                    {{ hospital.location }}
+                    Best for:
 
                 </p>
 
-                {% if hospital.contact %}
+                <ul>
 
-                <p>
+                    <li>Headaches</li>
 
-                    <i class="bi bi-telephone-fill"></i>
+                    <li>Dizziness</li>
 
-                    {{ hospital.contact }}
+                    <li>Memory concerns</li>
 
-                </p>
+                    <li>Numbness</li>
 
-                {% endif %}
+                </ul>
 
             </div>
 
@@ -81,34 +145,196 @@ Healthcare Resources
 
     </div>
 
-    {% endfor %}
+    <div class="col-md-4">
+
+        <div class="card stat-card h-100">
+
+            <div class="card-body">
+
+                <h5>
+                    Neurosurgeon
+                </h5>
+
+                <p class="text-muted">
+
+                    Best for:
+
+                </p>
+
+                <ul>
+
+                    <li>Brain tumors</li>
+
+                    <li>Surgical evaluation</li>
+
+                    <li>Advanced neurological conditions</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card stat-card h-100">
+
+            <div class="card-body">
+
+                <h5>
+                    Radiologist
+                </h5>
+
+                <p class="text-muted">
+
+                    Best for:
+
+                </p>
+
+                <ul>
+
+                    <li>MRI interpretation</li>
+
+                    <li>Image review</li>
+
+                    <li>Diagnostic imaging consultation</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
-<div class="card stat-card mt-4">
+<!-- HOSPITALS -->
+
+<div class="card stat-card mb-4">
+
+    <div class="card-body">
+
+        <h4 class="mb-4">
+            Recommended Neurology Centers
+        </h4>
+
+        <div class="row">
+
+            {% for hospital in hospitals %}
+
+            <div class="col-md-6 col-lg-4 mb-3">
+
+                <div class="card border-0 bg-light h-100">
+
+                    <div class="card-body">
+
+                        <h5>
+
+                            {{ hospital.name }}
+
+                        </h5>
+
+                        <p class="mb-1">
+
+                            <strong>
+                                Best For:
+                            </strong>
+
+                            {{ hospital.speciality }}
+
+                        </p>
+
+                        <p class="text-muted">
+
+                            {{ hospital.location }}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- EMERGENCY WARNING -->
+
+<div class="alert alert-danger mb-4">
+
+    <h5>
+        Seek Immediate Medical Attention If You Experience:
+    </h5>
+
+    <ul class="mt-3">
+
+        <li>
+            Sudden weakness in arms or legs
+        </li>
+
+        <li>
+            Loss of consciousness
+        </li>
+
+        <li>
+            Seizures
+        </li>
+
+        <li>
+            Sudden vision changes
+        </li>
+
+        <li>
+            Severe headache
+        </li>
+
+        <li>
+            Difficulty speaking
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- BRAIN HEALTH TIPS -->
+
+<div class="card stat-card">
 
     <div class="card-body">
 
         <h4>
-            Recommended Specialists
+            Daily Brain Health Tips
         </h4>
 
         <ul class="mt-3">
 
             <li>
-                Neurologist
+                Maintain regular sleep habits
             </li>
 
             <li>
-                Neurosurgeon
+                Stay hydrated throughout the day
             </li>
 
             <li>
-                Radiologist
+                Follow prescribed treatments
             </li>
 
             <li>
-                Neuro-Oncology Specialist
+                Exercise regularly
+            </li>
+
+            <li>
+                Attend scheduled follow-up appointments
             </li>
 
         </ul>

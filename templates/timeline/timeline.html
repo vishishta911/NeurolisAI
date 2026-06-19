@@ -54,7 +54,7 @@ Medical Timeline
     {% for record in records %}
 
     <div class="card shadow-sm border-0 mb-4"
-         style="border-left:6px solid #2563eb;">
+     style="border-left:6px solid #2563eb; border-radius:16px;">
 
         <div class="card-body">
 
@@ -63,15 +63,31 @@ Medical Timeline
                 <div class="col-md-2">
 
                     <img src="/{{ record.image_path }}"
-                         class="img-fluid rounded">
+                        class="img-fluid rounded shadow-sm">
 
                 </div>
 
-                <div class="col-md-7">
+                <div class="col-md-6">
+
+                    <div class="mb-2">
+
+                        <span class="badge bg-success">
+
+                            Analysis Complete
+
+                        </span>
+
+                        <span class="badge bg-secondary">
+
+                            NLS-{{ record.id }}
+
+                        </span>
+
+                    </div>
 
                     <h4 class="fw-bold">
 
-                        MRI Analysis Completed
+                        MRI Analysis Report
 
                     </h4>
 
@@ -87,25 +103,21 @@ Medical Timeline
                         patterns associated with
 
                         <strong>
+
                             {{ record.prediction }}
+
                         </strong>
 
                     </p>
 
                 </div>
 
-                <div class="col-md-3 text-end">
+                
 
-                    <span class="badge bg-success fs-6">
-
-                        {{ record.confidence }}%
-
-                    </span>
-
-                    <br><br>
+                <div class="col-md-2 text-end">
 
                     <a href="/result/{{ record.id }}"
-                       class="btn btn-outline-primary">
+                    class="btn btn-primary">
 
                         View Report
 
@@ -117,7 +129,8 @@ Medical Timeline
 
         </div>
 
-    </div>
+        </div>
+
 
     {% endfor %}
 
@@ -127,10 +140,28 @@ Medical Timeline
 
 <div class="alert alert-info">
 
-    No MRI records found.
+    <div class="alert alert-info">
 
-    Upload your first MRI scan to begin
-    your neurological health timeline.
+        <h5>
+            No MRI Records Available
+        </h5>
+
+        <p class="mb-3">
+
+            Upload your first Brain MRI scan
+            to begin building your neurological
+            health timeline.
+
+        </p>
+
+        <a href="/upload"
+        class="btn btn-primary">
+
+            Upload First MRI Scan
+
+        </a>
+
+    </div>
 
 </div>
 

@@ -22,15 +22,16 @@ Dashboard
         </h1>
 
         <p class="text-muted fs-5">
-            Monitor MRI analyses, medical history,
-            AI-generated insights, and neurological
-            health records in one place.
+
+            Monitor MRI analyses, neurological health records,
+            AI-generated insights, and medical history
+            in one centralized platform.
+
         </p>
 
     </div>
 
 </div>
-
 
 <!-- STATISTICS -->
 
@@ -43,6 +44,7 @@ Dashboard
             <div class="card-body">
 
                 <h6 class="text-muted">
+                    <i class="bi bi-file-earmark-medical"></i>
                     Total MRI Scans
                 </h6>
 
@@ -63,6 +65,7 @@ Dashboard
             <div class="card-body">
 
                 <h6 class="text-muted">
+                    <i class="bi bi-activity"></i>
                     Latest Prediction
                 </h6>
 
@@ -83,6 +86,7 @@ Dashboard
             <div class="card-body">
 
                 <h6 class="text-muted">
+                    <i class="bi bi-bar-chart-line"></i>
                     Average Confidence
                 </h6>
 
@@ -103,6 +107,7 @@ Dashboard
             <div class="card-body">
 
                 <h6 class="text-muted">
+                    <i class="bi bi-clock-history"></i>
                     Timeline Events
                 </h6>
 
@@ -118,50 +123,72 @@ Dashboard
 
 </div>
 
+<!-- ACTIVITY + INSIGHTS + ACTIONS -->
 
-<!-- MAIN CONTENT -->
+<div class="row mb-4">
 
-<div class="row">
+    <!-- RECENT ACTIVITY -->
 
-    <!-- RECENT ANALYSIS -->
+    <div class="col-lg-5">
 
-    <div class="col-lg-8">
-
-        <div class="card stat-card mb-4">
+        <div class="card stat-card h-100">
 
             <div class="card-body">
 
-                <h4 class="mb-3">
-                    Recent Analysis Summary
+                <h4 class="mb-4">
+                    Recent Activity
                 </h4>
 
-                <p>
-                    Latest AI analysis result:
-                </p>
+                {% if recent_record %}
 
-                <div class="alert alert-primary">
+                <div class="border-start border-4 border-primary ps-3">
 
-                    {{ latest_prediction }}
+                    <h6>
+                        MRI Analysis Completed
+                    </h6>
+
+                    <p class="text-muted mb-2">
+
+                        {{ recent_record.upload_date.strftime('%d %b %Y') }}
+
+                    </p>
+
+                    <p>
+
+                        Prediction:
+
+                        <strong>
+                            {{ recent_record.prediction }}
+                        </strong>
+
+                    </p>
+
+                    <p>
+
+                        Confidence:
+
+                        <strong>
+                            {{ recent_record.confidence }}%
+                        </strong>
+
+                    </p>
 
                 </div>
 
-                <p>
-
-                    Average confidence across
-                    uploaded MRI scans:
-
-                    <strong>
-                        {{ average_confidence }}%
-                    </strong>
-
-                </p>
-
                 <a href="/timeline"
-                   class="btn btn-primary">
+                   class="btn btn-outline-primary mt-3">
 
-                    View Analysis History
+                    View Timeline
 
                 </a>
+
+                {% else %}
+
+                <p>
+                    No MRI records available.
+                </p>
+
+                {% endif %}
 
             </div>
 
@@ -169,16 +196,85 @@ Dashboard
 
     </div>
 
+    <!-- AI INSIGHTS -->
+
+    <div class="col-lg-3">
+
+        <div class="card stat-card h-100">
+
+            <div class="card-body">
+
+                <h4 class="mb-4">
+                    AI Insights
+                </h4>
+
+                <div class="mb-3">
+
+                    <small class="text-muted">
+
+                        Latest Finding
+
+                    </small>
+
+                    <h6>
+
+                        {{ latest_prediction }}
+
+                    </h6>
+
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+
+                    <small class="text-muted">
+
+                        Highest Confidence
+
+                    </small>
+
+                    <h6>
+
+                        {{ highest_confidence }}%
+
+                    </h6>
+
+                </div>
+
+                <hr>
+
+                <div>
+
+                    <small class="text-muted">
+
+                        Reports Generated
+
+                    </small>
+
+                    <h6>
+
+                        {{ total_uploads }}
+
+                    </h6>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <!-- QUICK ACTIONS -->
 
     <div class="col-lg-4">
 
-        <div class="card stat-card">
+        <div class="card stat-card h-100">
 
             <div class="card-body">
 
-                <h4 class="mb-3">
+                <h4 class="mb-4">
                     Quick Actions
                 </h4>
 
@@ -191,17 +287,24 @@ Dashboard
 
                     </a>
 
-                    <a href="/timeline"
-                       class="btn btn-outline-primary">
+                    <a href="/reports"
+                       class="btn btn-outline-success">
 
-                        Medical Timeline
+                        View Reports
+
+                    </a>
+
+                    <a href="/resources"
+                       class="btn btn-outline-info">
+
+                        Healthcare Resources
 
                     </a>
 
                     <a href="/profile"
                        class="btn btn-outline-secondary">
 
-                        View Profile
+                        My Profile
 
                     </a>
 
@@ -215,10 +318,124 @@ Dashboard
 
 </div>
 
+<!-- SYSTEM STATUS -->
+
+<div class="row mb-4">
+
+    <div class="col-md-3">
+
+        <div class="card stat-card">
+
+            <div class="card-body text-center">
+
+                <h6>
+                    MRI Analysis
+                </h6>
+
+                <p class="text-success fw-bold">
+                    ● Online
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card stat-card">
+
+            <div class="card-body text-center">
+
+                <h6>
+                    Grad-CAM
+                </h6>
+
+                <p class="text-success fw-bold">
+                    ● Active
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card stat-card">
+
+            <div class="card-body text-center">
+
+                <h6>
+                    Timeline
+                </h6>
+
+                <p class="text-success fw-bold">
+                    ● Enabled
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card stat-card">
+
+            <div class="card-body text-center">
+
+                <h6>
+                    Reports
+                </h6>
+
+                <p class="text-success fw-bold">
+                    ● Available
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- HEALTHCARE SUPPORT -->
+
+<div class="card stat-card mb-4">
+
+    <div class="card-body">
+
+        <h4 class="mb-3">
+            Healthcare Support
+        </h4>
+
+        <p class="text-muted">
+
+            Access recommended neurology centers,
+            healthcare resources, specialist consultation
+            information, and neurological care support.
+
+        </p>
+
+        <a href="/resources"
+           class="btn btn-outline-primary">
+
+            Explore Healthcare Resources
+
+        </a>
+
+    </div>
+
+</div>
 
 <!-- PLATFORM FEATURES -->
 
-<div class="row mt-4">
+<div class="row">
 
     <div class="col-md-4">
 
@@ -232,9 +449,9 @@ Dashboard
 
                 <p class="text-muted">
 
-                    Detects MRI patterns related
-                    to Glioma, Meningioma,
-                    Pituitary Tumor and No Tumor.
+                    Detects MRI patterns associated with
+                    Glioma, Meningioma, Pituitary Tumor,
+                    and No Tumor classifications.
 
                 </p>
 
@@ -256,9 +473,9 @@ Dashboard
 
                 <p class="text-muted">
 
-                    Grad-CAM visualizations
-                    highlight image regions
-                    influencing predictions.
+                    Grad-CAM heatmaps highlight image
+                    regions influencing AI predictions,
+                    improving transparency.
 
                 </p>
 
@@ -280,9 +497,9 @@ Dashboard
 
                 <p class="text-muted">
 
-                    Track MRI history and
-                    neurological observations
-                    over time.
+                    Track MRI analysis history,
+                    neurological observations,
+                    and health records over time.
 
                 </p>
 

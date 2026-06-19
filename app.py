@@ -136,6 +136,53 @@ def dashboard():
 
     records = MRIRecord.query.filter_by(
         user_id=session["user_id"]
+    ).all()
+
+    total_uploads = len(records)
+
+    latest_prediction = (
+        records[-1].prediction
+        if records
+        else "No Records"
+    )
+
+    average_confidence = (
+        round(
+            sum(r.confidence for r in records) /
+            len(records),
+            2
+        )
+        if records
+        else 0
+    )
+
+    highest_confidence = (
+        max(r.confidence for r in records)
+        if records
+        else 0
+    )
+
+    recent_record = (
+        records[-1]
+        if records
+        else None
+    )
+
+    return render_template(
+        "dashboard/dashboard.html",
+        user_name=session["user_name"],
+        total_uploads=total_uploads,
+        latest_prediction=latest_prediction,
+        average_confidence=average_confidence,
+        highest_confidence=highest_confidence,
+        recent_record=recent_record
+    )
+
+    if "user_id" not in session:
+        return redirect("/login")
+
+    records = MRIRecord.query.filter_by(
+        user_id=session["user_id"]
     ).order_by(
         MRIRecord.upload_date.desc()
     ).all()
@@ -286,6 +333,8 @@ def result(record_id):
         probs
     )
 
+    # Risk Assessment
+
     if record.confidence >= 90:
         risk_level = "High Attention"
 
@@ -295,11 +344,47 @@ def result(record_id):
     else:
         risk_level = "Needs Further Evaluation"
 
+    # Specialist Recommendations
+
+    prediction_lower = prediction.lower()
+
+    if prediction_lower == "glioma":
+
+        specialists = [
+            "Neuro-Oncologist",
+            "Neurosurgeon",
+            "Radiologist"
+        ]
+
+    elif prediction_lower == "meningioma":
+
+        specialists = [
+            "Neurologist",
+            "Neurosurgeon",
+            "Radiologist"
+        ]
+
+    elif prediction_lower == "pituitary":
+
+        specialists = [
+            "Endocrinologist",
+            "Neurologist",
+            "Radiologist"
+        ]
+
+    else:
+
+        specialists = [
+            "Neurologist",
+            "General Physician"
+        ]
+
     return render_template(
         "mri/result.html",
         record=record,
         probability_data=probability_data,
-        risk_level=risk_level
+        risk_level=risk_level,
+        specialists=specialists
     )
 
 @app.route("/reports")

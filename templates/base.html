@@ -145,24 +145,20 @@
 
     <div class="main-content">
 
-        <div class="topbar">
+        <div class="topbar justify-content-end">
 
-            <h5 class="mb-0">
-                NeuroLis AI Dashboard
-            </h5>
+            {% if session.user_name %}
 
             <div>
-
-                {% if session.user_name %}
 
                 Welcome,
                 <strong>
                     {{ session.user_name }}
                 </strong>
 
-                {% endif %}
-
             </div>
+
+            {% endif %}
 
         </div>
 
@@ -174,7 +170,19 @@
         </div>
 
     </div>
+<footer class="text-center py-4 mt-5 text-muted">
 
+    NeuroLis AI v1.0
+
+    <br>
+
+    AI-Assisted Neurological Health Platform
+
+    <br>
+
+    Educational & Research Use Only
+
+</footer>
 </body>
 
 </html>
