@@ -11,7 +11,7 @@ from flask import request
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
-
+from werkzeug.middleware.proxy_fix import ProxyFix
 from extensions import db
 
 from models.user import User
@@ -41,6 +41,11 @@ load_dotenv()
 # Create Flask App
 app = Flask(__name__)
 
+app.wsgi_app = ProxyFix(
+    app.wsgi_app,
+    x_proto=1,
+    x_host=1
+)
 
 # App Configuration
 app.config["SECRET_KEY"] = os.getenv(
@@ -90,15 +95,23 @@ def home():
 #             _external=True
 #         )
 #     )
+# @app.route("/login")
+# def login():
+
+#     callback_url = "https://web-production-3a3a9.up.railway.app/auth/google/callback"
+
+#     return google.authorize_redirect(
+#         callback_url
+#     )
 @app.route("/login")
 def login():
-
-    callback_url = "https://web-production-3a3a9.up.railway.app/auth/google/callback"
-
     return google.authorize_redirect(
-        callback_url
+        url_for(
+            "google_callback",
+            _external=True,
+            _scheme="https"
+        )
     )
-
 
 # Google Callback
 @app.route("/auth/google/callback")
@@ -526,3 +539,4 @@ def logout():
 # Run App
 if __name__ == "__main__":
     app.run(debug=True)
+
