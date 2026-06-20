@@ -1,124 +1,374 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Analysis Result
+MRI Analysis Report
 {% endblock %}
 
 {% block content %}
 
-<div class="container mt-4">
+<div class="container-fluid">
 
-    <h2 class="mb-4">
-        MRI Analysis Result
-    </h2>
+<!-- REPORT HEADER -->
 
-    <div class="card shadow-sm">
+<div class="card border-0 shadow-sm mb-4"
+     style="border-radius:20px;">
 
-        <div class="card-body">
+    <div class="card-body p-4">
 
-            <div class="row">
+        <span class="badge bg-primary mb-2">
+            AI ANALYSIS REPORT
+        </span>
 
-                <!-- Original MRI -->
-                <div class="col-md-6">
+        <h1 class="fw-bold">
+            Brain MRI Analysis Report
+        </h1>
 
-                    <h5 class="mb-3">
-                        Uploaded MRI
-                    </h5>
+        <p class="text-muted">
 
-                    <img src="/{{ record.image_path }}"
-                         class="img-fluid rounded shadow-sm">
+            Generated using NeuroLis AI
+            Neurological Health Platform
 
-                </div>
+        </p>
 
-                <!-- Heatmap -->
-                <div class="col-md-6">
+    </div>
 
-                    <h5 class="mb-3">
-                        AI Attention Heatmap
-                    </h5>
+</div>
 
-                    <img src="/{{ record.heatmap_path }}"
-                         class="img-fluid rounded shadow-sm">
+<!-- SUMMARY CARDS -->
 
-                </div>
+<div class="row mb-4">
 
-            </div>
+    <div class="col-md-2">
 
-            <hr class="my-4">
+        <div class="card stat-card">
 
-            <!-- Prediction -->
-            <h5>
-                Prediction
-            </h5>
+            <div class="card-body text-center">
 
-            <div class="alert alert-primary">
+                <h6 class="text-muted">
+                    Prediction
+                </h6>
 
-                {{ record.prediction }}
+                <h5 class="fw-bold">
+                    {{ record.prediction }}
+                </h5>
 
             </div>
 
-            <!-- Confidence -->
-            <h5>
-                Confidence
-            </h5>
+        </div>
 
-            <div class="alert alert-success">
+    </div>
+
+    <div class="col-md-2">
+
+        <div class="card stat-card">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Confidence
+                </h6>
+
+                <h5 class="text-success fw-bold">
+                    {{ record.confidence }}%
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <div class="card stat-card">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Risk Level
+                </h6>
+
+                {% if risk_level == "High Attention" %}
+
+                <span class="badge bg-danger">
+                    {{ risk_level }}
+                </span>
+
+                {% elif risk_level == "Moderate Attention" %}
+
+                <span class="badge bg-warning text-dark">
+                    {{ risk_level }}
+                </span>
+
+                {% else %}
+
+                <span class="badge bg-info">
+                    {{ risk_level }}
+                </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <div class="card stat-card">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Report ID
+                </h6>
+
+                <h5>
+                    NLS-{{ record.id }}
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <div class="card stat-card">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Date
+                </h6>
+
+                <h6>
+                    {{ record.upload_date.strftime('%d %b %Y') }}
+                </h6>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <div class="card stat-card">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Status
+                </h6>
+
+                <span class="badge bg-success">
+                    Complete
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- IMAGES -->
+
+<div class="row mb-4">
+
+    <div class="col-lg-6">
+
+        <div class="card stat-card">
+
+            <div class="card-body">
+
+                <h5 class="mb-3">
+                    Original MRI Scan
+                </h5>
+
+                <img src="/{{ record.image_path }}"
+                     class="img-fluid rounded">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-6">
+
+        <div class="card stat-card">
+
+            <div class="card-body">
+
+                <h5 class="mb-3">
+                    AI Attention Heatmap
+                </h5>
+
+                <img src="/{{ record.heatmap_path }}"
+                     class="img-fluid rounded">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CONFIDENCE BAR -->
+
+<div class="card stat-card mb-4">
+
+    <div class="card-body">
+
+        <h5>
+            AI Confidence Score
+        </h5>
+
+        <div class="progress mt-3"
+             style="height:25px;">
+
+            <div class="progress-bar bg-success"
+                 role="progressbar"
+                 style="width: {{ record.confidence }}%;">
 
                 {{ record.confidence }}%
 
             </div>
 
-            <!-- Low Confidence Warning -->
-            {% if record.confidence < 70 %}
+        </div>
 
-            <div class="alert alert-warning">
+    </div>
 
-                <strong>
-                    Low Confidence Prediction
-                </strong>
+</div>
 
-                <br>
+<!-- LOW CONFIDENCE -->
 
-                The model is uncertain about this classification.
-                Professional medical evaluation is recommended.
+{% if record.confidence < 70 %}
+
+<div class="alert alert-warning">
+
+    <strong>
+        Low Confidence Prediction
+    </strong>
+
+    <br>
+
+    The AI model is uncertain about
+    this classification.
+
+    Professional medical evaluation
+    is strongly recommended.
+
+</div>
+
+{% endif %}
+
+<!-- PROBABILITY DISTRIBUTION -->
+
+<div class="card stat-card mb-4">
+
+    <div class="card-body">
+
+        <h5 class="mb-4">
+            Probability Distribution
+        </h5>
+
+        {% for class_name, prob in probability_data %}
+
+        <div class="mb-3">
+
+            <div class="d-flex justify-content-between">
+
+                <span>
+
+                    {{ class_name }}
+
+                </span>
+
+                <span>
+
+                    {{ "%.2f"|format(prob * 100) }}%
+
+                </span>
 
             </div>
 
-            {% endif %}
+            <div class="progress">
 
-            <hr class="my-4">
+                <div class="progress-bar bg-primary"
+                     role="progressbar"
+                     style="width: {{ prob * 100 }}%;">
 
-            <!-- Probability Distribution -->
-            <h5 class="mb-3">
-                Prediction Probability Distribution
-            </h5>
-
-            {% for class_name, prob in probability_data %}
-
-            <div class="mb-3">
-
-                <div class="d-flex justify-content-between">
-
-                    <span>
-                        {{ class_name }}
-                    </span>
-
-                    <span>
-                        {{ "%.2f"|format(prob * 100) }}%
-                    </span>
+                    {{ "%.1f"|format(prob * 100) }}%
 
                 </div>
 
-                <div class="progress">
+            </div>
 
-                    <div class="progress-bar bg-primary"
-                        role="progressbar"
-                        aria-valuenow="{{ prob * 100 }}"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        style="width: {{ prob * 100 }}%;">
+        </div>
 
-                        {{ "%.1f"|format(prob * 100) }}%
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- INTERPRETATION -->
+
+<div class="card stat-card mb-4">
+
+    <div class="card-body">
+
+        <h5>
+            AI Clinical Interpretation
+        </h5>
+
+        <p class="mt-3">
+
+            {{ record.explanation }}
+
+        </p>
+
+    </div>
+
+</div>
+<!-- RECOMMENDED SPECIALISTS -->
+
+<div class="card stat-card mb-4">
+
+    <div class="card-body">
+
+        <h5>
+            Recommended Specialists
+        </h5>
+
+        <p class="text-muted">
+
+            Based on the analysis result, the following
+            healthcare professionals may be relevant.
+
+        </p>
+
+        <div class="row mt-3">
+
+            {% for specialist in specialists %}
+
+            <div class="col-md-4 mb-3">
+
+                <div class="card border-info h-100">
+
+                    <div class="card-body text-center">
+
+                        <h6>
+                            {{ specialist }}
+                        </h6>
 
                     </div>
 
@@ -128,52 +378,156 @@ Analysis Result
 
             {% endfor %}
 
+        </div>
 
-            <!-- AI Explanation -->
-            <h5>
-                AI Explanation
-            </h5>
+    </div>
 
-            <div class="alert alert-light">
+</div>
 
-                {{ record.explanation }}
+<!-- NEXT STEPS -->
 
+<div class="card stat-card mb-4">
+
+    <div class="card-body">
+
+        <h5>
+            Recommended Next Steps
+        </h5>
+
+        <ul class="mt-3">
+
+            <li>
+                Download analysis report
+            </li>
+
+            <li>
+                Save record to medical timeline
+            </li>
+
+            <li>
+                Review healthcare resources
+            </li>
+
+            <li>
+                Consult a qualified specialist
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>
+<div class="card stat-card mb-4">
+
+    <div class="card-body">
+
+        <h5>
+            Recommended Neurology Centers
+        </h5>
+
+        <div class="row mt-3">
+
+            <div class="col-md-3">
+                <div class="card border-0 bg-light">
+                    <div class="card-body text-center">
+                        <h6>Apollo Hospitals</h6>
+                        <small>Neurology & Neurosurgery</small>
+                    </div>
+                </div>
             </div>
 
-            <!-- Disclaimer -->
-            <div class="alert alert-secondary">
-
-                <strong>
-                    Disclaimer:
-                </strong>
-
-                This system is intended for educational and research purposes only.
-                It should not be used as a substitute for professional medical diagnosis.
-
+            <div class="col-md-3">
+                <div class="card border-0 bg-light">
+                    <div class="card-body text-center">
+                        <h6>Yashoda Hospitals</h6>
+                        <small>Neurosciences</small>
+                    </div>
+                </div>
             </div>
 
-            <!-- Buttons -->
-            <div class="mt-3">
+            <div class="col-md-3">
+                <div class="card border-0 bg-light">
+                    <div class="card-body text-center">
+                        <h6>KIMS Hospitals</h6>
+                        <small>Neurology</small>
+                    </div>
+                </div>
+            </div>
 
-                <a href="/download-report/{{ record.id }}"
-                   class="btn btn-success">
-
-                    Download Report
-
-                </a>
-
-                <a href="/timeline"
-                   class="btn btn-outline-primary ms-2">
-
-                    Back to Timeline
-
-                </a>
-
+            <div class="col-md-3">
+                <div class="card border-0 bg-light">
+                    <div class="card-body text-center">
+                        <h6>NIMS</h6>
+                        <small>Government Neuro Center</small>
+                    </div>
+                </div>
             </div>
 
         </div>
 
     </div>
+
+</div>
+<!-- ANALYSIS COMPLETE -->
+
+<div class="alert alert-success">
+
+    <strong>
+        Analysis Complete
+    </strong>
+
+    <br>
+
+    Your MRI scan has been successfully analyzed
+    and added to your neurological health timeline.
+
+</div>
+<!-- DISCLAIMER -->
+
+<div class="alert alert-secondary">
+
+    <strong>
+        Disclaimer
+    </strong>
+
+    <br>
+
+    NeuroLis AI provides AI-assisted
+    neurological analysis for educational
+    and research purposes only.
+
+    It should not be used as a substitute
+    for professional medical diagnosis.
+
+</div>
+
+<!-- ACTION BUTTONS -->
+
+<div class="mt-4">
+
+    <a href="/download-report/{{ record.id }}"
+       class="btn btn-success">
+
+        Download PDF Report
+
+    </a>
+
+    <a href="/timeline"
+       class="btn btn-outline-primary ms-2">
+
+        Medical Timeline
+
+    </a>
+
+    <a href="/upload"
+       class="btn btn-outline-secondary ms-2">
+
+        New Analysis
+
+    </a>
+
+</div>
+
 
 </div>
 

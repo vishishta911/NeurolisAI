@@ -112,7 +112,25 @@ Medical Timeline
 
                 </div>
 
-                
+                <div class="col-md-2">
+
+                    <small class="text-muted">
+                        Confidence
+                    </small>
+
+                    <div class="progress mt-2"
+                        style="height:20px;">
+
+                        <div class="progress-bar bg-success"
+                            style="width: {{ record.confidence }}%;">
+
+                            {{ "%.1f"|format(record.confidence) }}%
+
+                        </div>
+
+                    </div>
+
+                </div>
 
                 <div class="col-md-2 text-end">
 
@@ -138,7 +156,7 @@ Medical Timeline
 
 {% else %}
 
-<div class="alert alert-info">
+
 
     <div class="alert alert-info">
 
@@ -163,7 +181,7 @@ Medical Timeline
 
     </div>
 
-</div>
+
 
 {% endif %}
 

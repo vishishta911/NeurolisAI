@@ -82,13 +82,21 @@ def home():
 
 
 # Google Login
+# @app.route("/login")
+# def login():
+#     return google.authorize_redirect(
+#         url_for(
+#             "google_callback",
+#             _external=True
+#         )
+#     )
 @app.route("/login")
 def login():
+
+    callback_url = "https://web-production-3a3a9.up.railway.app/auth/google/callback"
+
     return google.authorize_redirect(
-        url_for(
-            "google_callback",
-            _external=True
-        )
+        callback_url
     )
 
 
