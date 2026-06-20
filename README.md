@@ -148,7 +148,8 @@ dataset/
 
 ### Home Page
 
-(Add Screenshot)
+<img width="947" height="472" alt="image" src="https://github.com/user-attachments/assets/99528eb1-1544-48e9-a316-4a58fceb3760" />
+
 
 ### Dashboard
 
@@ -177,7 +178,7 @@ dataset/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/NeuroLisAI.git
+git clone https://github.com/vishishta911/NeuroLisAI.git
 
 cd NeuroLisAI
 ```
