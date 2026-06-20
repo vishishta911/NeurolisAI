@@ -153,23 +153,27 @@ dataset/
 
 ### Dashboard
 
-(Add Screenshot)
+<img width="945" height="472" alt="image" src="https://github.com/user-attachments/assets/5d3489a0-fe3b-4db9-a3c4-f30c72b3e9e7" />
+
 
 ### MRI Upload
+<img width="946" height="466" alt="image" src="https://github.com/user-attachments/assets/a00ed97c-8c27-48a4-84e1-1389674b381e" />
 
-(Add Screenshot)
 
 ### Analysis Report
 
-(Add Screenshot)
+<img width="339" height="376" alt="image" src="https://github.com/user-attachments/assets/d4d8f541-e296-45f1-bbb8-8a2c0a5106fd" />
+
 
 ### Medical Timeline
 
-(Add Screenshot)
+<img width="947" height="473" alt="image" src="https://github.com/user-attachments/assets/7dcd108f-3fe9-44a3-addb-867a3a84fe14" />
+
 
 ### PDF Report
 
-(Add Screenshot)
+<img width="328" height="425" alt="image" src="https://github.com/user-attachments/assets/40753b8c-a012-443d-a13d-906c430a038d" />
+
 
 ---
 
