@@ -53,6 +53,9 @@ app.config["SECRET_KEY"] = os.getenv(
     "neurolis_development_secret_key"
 )
 
+app.config["SESSION_COOKIE_SECURE"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///neurolis.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
