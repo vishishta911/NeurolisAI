@@ -44,18 +44,19 @@ app = Flask(__name__)
 
 app.wsgi_app = ProxyFix(
     app.wsgi_app,
+    x_for=1,
     x_proto=1,
     x_host=1
 )
 
 # App Configuration
-app.config["SECRET_KEY"] = os.getenv(
-    "SECRET_KEY",
-    "neurolis_development_secret_key"
-)
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
 app.config["SESSION_COOKIE_SECURE"] = True
-app.config["SESSION_COOKIE_SAMESITE"] = "None"
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+
+app.config["PREFERRED_URL_SCHEME"] = "https"
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///neurolis.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
