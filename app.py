@@ -126,8 +126,11 @@ def login():
         _scheme="https"
     )
 
+    # return google.authorize_redirect(
+    #     redirect_uri
+    # )
     return google.authorize_redirect(
-        redirect_uri
+        "https://neurolisai.up.railway.app/auth/google/callback"
     )
 
 # Google Callback
