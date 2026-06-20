@@ -1,117 +1,67 @@
-# NeuroLis AI
+# 🧠 NeuroLis AI – Brain MRI Analysis Platform
 
-## AI-Powered Brain MRI Analysis and Neurological Health Tracking Platform
-
-NeuroLis AI is an end-to-end web application that combines Artificial Intelligence, Medical Image Analysis, and Explainable AI techniques to assist users in understanding Brain MRI scans.
-
-The system uses a MobileNetV2-based deep learning model to classify Brain MRI images into neurological categories and provides visual explanations using Grad-CAM heatmaps.
+NeuroLis AI is an AI-powered healthcare platform designed to assist in Brain MRI analysis using Deep Learning and Explainable AI techniques. The system enables users to upload MRI scans, receive AI-generated predictions, visualize model attention through Grad-CAM heatmaps, generate professional reports, and maintain a neurological health timeline.
 
 ---
 
-## Features
+## 🚀 Live Demo
 
-### Secure Authentication
-
-* Google OAuth Login
-* User-specific MRI history
-* Protected dashboard and profile pages
-
-### Brain MRI Analysis
-
-* Upload Brain MRI images
-* Automatic AI-based classification
-* MobileNetV2 transfer learning model
-
-### Explainable AI
-
-* Grad-CAM heatmap generation
-* Visual explanation of model predictions
-* Improved transparency and interpretability
-
-### Prediction Results
-
-* Tumor classification
-* Confidence score
-* Probability distribution across classes
-* AI-generated explanation
-
-### Medical Timeline Tracking
-
-* View historical MRI analyses
-* Track previous predictions
-* Organized patient history
-
-### PDF Report Generation
-
-* Download analysis reports
-* Prediction summary
-* Confidence information
-* AI explanation
+**Website:** https://neurolisai.up.railway.app/
 
 ---
 
-## Dataset
+## 📌 Features
 
-Brain MRI Dataset containing four classes:
+### 🧠 AI-Based MRI Classification
 
-* Glioma
-* Meningioma
-* Pituitary Tumor
-* No Tumor
+* Detects patterns associated with:
 
-Dataset Structure:
+  * Glioma Tumor
+  * Meningioma Tumor
+  * Pituitary Tumor
+  * No Tumor
 
-```text
-dataset/
-├── Training/
-│   ├── glioma/
-│   ├── meningioma/
-│   ├── pituitary/
-│   └── notumor/
-│
-└── Testing/
-    ├── glioma/
-    ├── meningioma/
-    ├── pituitary/
-    └── notumor/
-```
+### 🔥 Explainable AI (Grad-CAM)
 
----
+* Generates visual heatmaps highlighting image regions influencing model predictions.
+* Improves transparency and interpretability of AI decisions.
 
-## AI Model
+### 📄 Professional Medical Reports
 
-### Model Architecture
+* Generates downloadable PDF reports.
+* Includes prediction results, confidence scores, risk assessment, specialist recommendations, and healthcare guidance.
 
-* MobileNetV2
-* Transfer Learning
-* Fine-Tuning
-* Softmax Output Layer
+### 📈 Neurological Health Timeline
 
-### Image Specifications
+* Stores historical MRI analyses.
+* Allows users to track neurological observations over time.
 
-* Input Size: 224 × 224
-* RGB Images
-* Normalized Pixel Values
+### 👤 Secure User Authentication
 
----
+* Google OAuth Login integration.
+* Personalized dashboard for each user.
 
-## Performance
+### 🏥 Healthcare Resources
 
-### Training Results
+* Provides educational information about neurological conditions.
+* Recommends specialists and neurology centers.
 
-| Metric              | Value  |
-| ------------------- | ------ |
-| Training Accuracy   | ~89.7% |
-| Validation Accuracy | ~91.0% |
-| Test Accuracy       | ~82.0% |
+### 📊 Interactive Dashboard
 
-### Explainability
-
-Grad-CAM is used to highlight regions of interest that influence the model's prediction.
+* MRI upload statistics
+* Confidence tracking
+* Recent activity monitoring
+* AI-generated health insights
 
 ---
 
-## Technology Stack
+## 🏗️ System Architecture
+
+MRI Upload → Deep Learning Model → Prediction → Grad-CAM Heatmap → Report Generation → Timeline Storage
+
+---
+
+## 🛠️ Technology Stack
 
 ### Frontend
 
@@ -122,75 +72,114 @@ Grad-CAM is used to highlight regions of interest that influence the model's pre
 
 ### Backend
 
+* Python
 * Flask
-* SQLAlchemy
-* Authlib
+* Flask-SQLAlchemy
+* Authlib (Google OAuth)
+
+### Artificial Intelligence
+
+* TensorFlow
+* Keras
+* MobileNetV2
+* Grad-CAM
 
 ### Database
 
 * SQLite
 
-### Machine Learning
+### Deployment
 
-* TensorFlow
-* Keras
-* MobileNetV2
-* NumPy
-* OpenCV
+* Railway
+* GitHub
 
-### Visualization
+### Reporting
 
-* Matplotlib
-* Grad-CAM
+* ReportLab
 
 ---
 
-## Project Structure
+## 📂 Dataset
 
-```text
-NeuroLis_AI/
+Brain MRI dataset containing four classes:
+
+* Glioma
+* Meningioma
+* Pituitary
+* No Tumor
+
+Dataset Structure:
+
+dataset/
+├── Training/
+│ ├── glioma/
+│ ├── meningioma/
+│ ├── pituitary/
+│ └── notumor/
 │
-├── app.py
-├── extensions.py
-├── requirements.txt
-│
-├── dataset/
-│
-├── models/
-│   ├── user.py
-│   ├── symptom.py
-│   ├── mri_record.py
-│
-├── services/
-│   ├── predictor.py
-│   ├── gradcam.py
-│   ├── explanation.py
-│   └── report_generator.py
-│
-├── templates/
-│   ├── dashboard/
-│   ├── mri/
-│   ├── profile/
-│   └── timeline/
-│
-├── static/
-│   ├── uploads/
-│   └── reports/
-│
-└── model_training/
-    ├── train_model.py
-    └── evaluate_model.py
-```
+└── Testing/
+├── glioma/
+├── meningioma/
+├── pituitary/
+└── notumor/
 
 ---
 
-## Installation
+## 🎯 Model Information
+
+### Architecture
+
+* MobileNetV2 (Transfer Learning)
+* Image Size: 224 × 224
+* Optimizer: Adam
+* Loss Function: Categorical Crossentropy
+
+### Performance
+
+| Metric   | Value       |
+| -------- | ----------- |
+| Accuracy | 82%         |
+| Classes  | 4           |
+| Model    | MobileNetV2 |
+
+---
+
+## 📸 Screenshots
+
+### Home Page
+
+(Add Screenshot)
+
+### Dashboard
+
+(Add Screenshot)
+
+### MRI Upload
+
+(Add Screenshot)
+
+### Analysis Report
+
+(Add Screenshot)
+
+### Medical Timeline
+
+(Add Screenshot)
+
+### PDF Report
+
+(Add Screenshot)
+
+---
+
+## ⚙️ Installation
 
 ### Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Neurolis-AI.git
-cd Neurolis-AI
+git clone https://github.com/YOUR_USERNAME/NeuroLisAI.git
+
+cd NeuroLisAI
 ```
 
 ### Create Virtual Environment
@@ -213,29 +202,13 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
----
-
-## Environment Variables
-
-Create a `.env` file:
-
-```env
-SECRET_KEY=your_secret_key
-
-GOOGLE_CLIENT_ID=your_google_client_id
-
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-```
-
----
-
-## Run Application
+### Run Application
 
 ```bash
 python app.py
 ```
 
-Open:
+Application will run at:
 
 ```text
 http://127.0.0.1:5000
@@ -243,20 +216,63 @@ http://127.0.0.1:5000
 
 ---
 
-## Future Enhancements
+## 📁 Project Structure
 
-* Multi-modal neurological assessment
-* Doctor dashboard
-* Cloud deployment
-* Advanced MRI segmentation
-* Medical report summarization
-* Symptom-based risk assessment
-* Longitudinal disease progression tracking
+NeuroLisAI/
+
+├── app.py
+
+├── models/
+
+├── services/
+
+├── static/
+
+├── templates/
+
+├── database/
+
+├── report_generator.py
+
+├── requirements.txt
+
+├── Procfile
+
+└── README.md
 
 ---
 
-## Disclaimer
+## 🔮 Future Enhancements
 
-This project is developed for educational, research, and demonstration purposes only.
+* Multi-patient management
+* Doctor dashboard
+* Hospital integration
+* Cloud database support
+* Additional neurological disease detection
+* AI chatbot for patient guidance
+* Mobile application support
 
-The predictions generated by NeuroLis AI should not be considered medical advice and must not replace professional clinical diagnosis or treatment.
+---
+
+## ⚠️ Disclaimer
+
+NeuroLis AI is intended for educational, research, and demonstration purposes only.
+
+The predictions generated by the system should not be considered a substitute for professional medical diagnosis, treatment, or clinical decision-making.
+
+---
+
+## 👩‍💻 Developer
+
+**Kasarla Vishishta Reddy**
+
+B.Tech – Computer Science & Engineering (AI & ML)
+
+Geethanjali College of Engineering and Technology
+
+LinkedIn:
+https://www.linkedin.com/in/vishishta-reddy-4100081b2
+
+---
+
+⭐ If you found this project useful, consider giving it a star.
