@@ -41,6 +41,7 @@ load_dotenv()
 # Create Flask App
 app = Flask(__name__)
 
+
 app.wsgi_app = ProxyFix(
     app.wsgi_app,
     x_proto=1,
@@ -54,11 +55,11 @@ app.config["SECRET_KEY"] = os.getenv(
 )
 
 app.config["SESSION_COOKIE_SECURE"] = True
-app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_COOKIE_SAMESITE"] = "None"
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///neurolis.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
+app.config["PREFERRED_URL_SCHEME"] = "https"
 
 # Initialize Database
 db.init_app(app)
@@ -106,14 +107,27 @@ def home():
 #     return google.authorize_redirect(
 #         callback_url
 #     )
+# @app.route("/login")
+# def login():
+#     return google.authorize_redirect(
+#         url_for(
+#             "google_callback",
+#             _external=True,
+#             _scheme="https"
+#         )
+#     )
+
 @app.route("/login")
 def login():
+
+    redirect_uri = url_for(
+        "google_callback",
+        _external=True,
+        _scheme="https"
+    )
+
     return google.authorize_redirect(
-        url_for(
-            "google_callback",
-            _external=True,
-            _scheme="https"
-        )
+        redirect_uri
     )
 
 # Google Callback
